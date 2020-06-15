@@ -14,7 +14,16 @@ _docker_sdk()
     #
     #  Complete the arguments to some of the basic commands.
     #
-    # TODO add support for second level options
+    case "${prev}" in
+        bootstrap|boot)
+            local deploy_configurations=$(ls  deploy.* )
+            COMPREPLY=( $(compgen -W "${deploy_configurations=}" -- ${cur}) )
+            return 0
+            ;;
+        *)
+        ;;
+    esac
+
 
    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
    return 0
