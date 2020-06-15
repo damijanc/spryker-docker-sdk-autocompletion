@@ -38,10 +38,3 @@ _docker_sdk()
    return 0
 }
 complete -F _docker_sdk docker/sdk
-
-
-
-   COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-   return 0
-}
-complete -F _docker_sdk docker/sdk
