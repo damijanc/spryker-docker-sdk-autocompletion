@@ -9,3 +9,6 @@ Autocompletion file for spryker docker sdk https://github.com/spryker/docker-sdk
  ## Usage
  
  Go to your project folder and type `docker/sdk` and press TAB.
+ 
+ ## Optional
+ If you install yq - https://mikefarah.gitbook.io/yq/ you will be able to autocomplete demo|demo-data command
