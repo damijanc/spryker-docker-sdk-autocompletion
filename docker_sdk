@@ -1,5 +1,6 @@
 _docker_sdk()
 { 
+    local YQ=$(builtin type -P "yq")
     local cur prev opts base
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
@@ -20,9 +21,24 @@ _docker_sdk()
             COMPREPLY=( $(compgen -W "${deploy_configurations=}" -- ${cur}) )
             return 0
             ;;
+        demo|demo-data)
+           local sections=
+           if [ -n "${YQ}" ]
+           then
+             sections=$($YQ read -printMode  config/install/docker.yml  sections | grep -v command | awk '{gsub(/:/," ")};1' | grep -v '  ')
+           fi
+           COMPREPLY=( $(compgen -W "${sections=}" -- ${cur}) )
+           return 0
+           ;;
         *)
         ;;
     esac
+
+   COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+   return 0
+}
+complete -F _docker_sdk docker/sdk
+
 
 
    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
