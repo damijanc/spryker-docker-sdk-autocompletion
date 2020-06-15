@@ -1,0 +1,22 @@
+_docker_sdk()
+{ 
+    local cur prev opts base
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    #
+    #  The basic options we'll complete.
+    #
+    opts="help up run start console bootstrap boot restart down stop logs cli testing wait pull build demo demo-data jobs clean-data reset remove clean"
+
+
+    #
+    #  Complete the arguments to some of the basic commands.
+    #
+    # TODO add support for second level options
+
+   COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+   return 0
+}
+complete -F _docker_sdk docker/sdk
